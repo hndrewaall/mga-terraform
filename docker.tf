@@ -198,7 +198,7 @@ resource "aws_alb" "docker" {
 }
 
 module "ecs-autoscaling" {
-    source = "git@github.com:RobotsAndPencils/terraform-ecs-autoscaling.git:cddd53db02d3b8fe9245a1feb1423cf3a2a158ba"
+    source = "git@github.com:RobotsAndPencils/terraform-ecs-autoscaling.git?ref=cddd53db02d3b8fe9245a1feb1423cf3a2a158ba"
     cluster_name = "terraform_testing"
     key_name = "testing"
     environment_name = "testing"

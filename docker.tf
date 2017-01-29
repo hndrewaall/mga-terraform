@@ -196,3 +196,24 @@ resource "aws_alb" "docker" {
         prefix = "alb/docker"
     }*/
 }
+
+module "ecs-autoscaling" {
+    source = "git@github.com:RobotsAndPencils/terraform-ecs-autoscaling.git:cddd53db02d3b8fe9245a1feb1423cf3a2a158ba"
+    cluster_name = "terraform_testing"
+    key_name = "testing"
+    environment_name = "testing"
+    instance_type = "t2.nano"
+    region = "${provider.aws.region}"
+    availability_zones = "${aws_subnet.one.availability_zone},${aws_subnet.two.availability_zone},${aws_subnet.three.availability_zone},${aws_subnet.four.availability_zone}"
+    subnet_ids = "${aws_subnet.one.name},${aws_subnet.two.name},${aws_subnet.three.name},${aws_subnet.four.name}"
+    security_group_ids=["${aws_security_group.ecs-instance.id}",
+                        "${aws_security_group.ssh-gbre.id}",
+                        "${aws_security_group.db-gbre.id}"]
+    min_size = "2"
+    max_size = "4"
+    desired_capacity ="2"
+    iam_instance_profile = "${aws_iam_instance_profile.ecs-instance.name}"
+    registry_url = "https://index.docker.io/v1/"
+    registry_email = "your_email@"
+    registry_auth = "your_registry_auth_token"
+}

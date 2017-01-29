@@ -200,7 +200,7 @@ resource "aws_alb" "docker" {
 module "ecs-autoscaling" {
     source = "git@github.com:RobotsAndPencils/terraform-ecs-autoscaling.git?ref=cddd53db02d3b8fe9245a1feb1423cf3a2a158ba"
     cluster_name = "terraform_testing"
-    key_name = "testing"
+    key_name = "${aws_key_pair.massgo_ec2.key_name}"
     environment_name = "testing"
     instance_type = "t2.nano"
     region = "${var.region}"

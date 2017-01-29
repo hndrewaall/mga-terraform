@@ -205,10 +205,8 @@ module "ecs-autoscaling" {
     instance_type = "t2.nano"
     region = "${var.region}"
     availability_zones = "${aws_subnet.one.availability_zone},${aws_subnet.two.availability_zone},${aws_subnet.three.availability_zone},${aws_subnet.four.availability_zone}"
-    subnet_ids = "${aws_subnet.one.name},${aws_subnet.two.name},${aws_subnet.three.name},${aws_subnet.four.name}"
-    security_group_ids=["${aws_security_group.ecs-instance.id}",
-                        "${aws_security_group.ssh-gbre.id}",
-                        "${aws_security_group.db-gbre.id}"]
+    subnet_ids = "${aws_subnet.one.id},${aws_subnet.two.id},${aws_subnet.three.id},${aws_subnet.four.id}"
+    security_group_ids="${aws_security_group.ecs-instance.id},${aws_security_group.ssh-gbre.id},${aws_security_group.db-gbre.id}"
     min_size = "2"
     max_size = "4"
     desired_capacity ="2"

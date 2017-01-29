@@ -203,7 +203,7 @@ module "ecs-autoscaling" {
     key_name = "testing"
     environment_name = "testing"
     instance_type = "t2.nano"
-    region = "${provider.aws.region}"
+    region = "${var.region}"
     availability_zones = "${aws_subnet.one.availability_zone},${aws_subnet.two.availability_zone},${aws_subnet.three.availability_zone},${aws_subnet.four.availability_zone}"
     subnet_ids = "${aws_subnet.one.name},${aws_subnet.two.name},${aws_subnet.three.name},${aws_subnet.four.name}"
     security_group_ids=["${aws_security_group.ecs-instance.id}",

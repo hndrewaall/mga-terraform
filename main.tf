@@ -244,6 +244,25 @@ resource "aws_security_group" "ssh-vpc" {
 
     tags
     {
-        Name = "ssh_gbre"
+        Name = "ssh_vpc"
     }
 }
+
+resource "aws_security_group" "ssh-all" {
+    name = "ssh_all"
+    description = "Allow SSH traffic from everywhere"
+
+    ingress
+    {
+        from_port = 0
+        to_port = 22
+        protocol = "tcp"
+        cidr_blocks = ["0.0.0.0/0"]
+    }
+
+    tags
+    {
+        Name = "ssh_all"
+    }
+}
+

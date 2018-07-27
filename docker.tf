@@ -174,7 +174,8 @@ resource "aws_instance" "docker" {
     vpc_security_group_ids = ["${aws_security_group.ecs-instance.id}",
                               "${aws_security_group.ssh-all.id}",
                               "${aws_security_group.db-gbre.id}",
-                              "${aws_security_group.db2-gbre.id}"]
+                              "${aws_security_group.db2-gbre.id}",
+                              "${aws_security_group.outbound-all.id}"]
 }
 
 module "docker_address" {
